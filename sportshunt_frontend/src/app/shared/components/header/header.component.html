@@ -1,0 +1,69 @@
+<ng-progress id="progressBar" [color]="progressBar.currentColor"></ng-progress>
+<ngx-alerts></ngx-alerts>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href=""><i class="fas fa-basketball-ball"></i> SportsHunt</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="nav-link" [routerLink] = "['searchSportsEvents']" routerLinkActive="active"><i class="fas fa-search"></i> Search Sports</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto headerNav">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li> -->
+      <li class="nav-item" *ngIf="!authService.loggedIn();">
+        <a
+          class="nav-link"
+          [routerLink]="['register']"
+          routerLinkActive="active"
+          >Register</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="!authService.loggedIn();">
+        <a class="nav-link" [routerLink]="['login']" routerLinkActive="active"
+          >Login</a
+        >
+      </li>
+      <li class="nav-item dropdown" dropdown *ngIf="authService.loggedIn();">
+        <a class="nav-link dropdown-toggle" dropdownToggle>
+          <!-- Welcome, {{authService.decodedToken?.unique_name}} -->
+          {{authService.loggedInUserName}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" *dropdownMenu >
+          <a [routerLink]="['reset-password']" class="dropdown-item" routerLinkActive="active"><i class="fas fa-key"></i> Reset Password</a>
+          <a [routerLink]="['myEvents']" class="dropdown-item" routerLinkActive="active"><i class="fas fa-calendar"></i> My Events</a>
+          <a (click)="logout();" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </li>
+    <!--       
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Popular Sports
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Basket Ball</a>
+          <a class="dropdown-item" href="#">Base Ball</a>
+          <a class="dropdown-item" href="#">Soccer</a>
+        </div>
+      </li>
+    -->
+    </ul>
+  </div>
+</nav>
